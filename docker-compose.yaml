@@ -1,0 +1,33 @@
+services:
+  yolo_world_ros2:
+    container_name: yolo_world_ros2
+    image: nakalab/humble:yolo_world_ros2
+    privileged: true
+    ipc: host
+    network_mode: host
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    volumes:
+      - /run/user/1000/pulse/native:/tmp/pulse/native
+      - ~/.config/pulse/cookie:/tmp/pulse/cookie:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - $HOME/.Xauthority/:/root/.Xauthority
+      - /dev:/dev
+      - ./src:/home/user/colcon_ws/src
+    devices:
+       - /dev:/dev
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: /bin/bash
