@@ -10,6 +10,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
 set(msg_files
   "msg/PixelPose.msg"
@@ -17,7 +18,9 @@ set(msg_files
   "msg/BbPixelPoseArray.msg"
   "msg/ObjectPose.msg"
   "msg/ObjectPoseArray.msg"
-  DEPENDENCIES builtin_interfaces std_msgs geometry_msgs
+  "msg/ObjectImage.msg"
+  "msg/ObjectImageArray.msg"
+  DEPENDENCIES builtin_interfaces std_msgs geometry_msgs sensor_msgs
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
