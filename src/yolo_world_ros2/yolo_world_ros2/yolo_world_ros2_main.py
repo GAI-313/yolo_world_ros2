@@ -36,7 +36,7 @@ class YoloWorldRos2Main(Node):
         self.get_logger().info('YoLo-World ROS2 Ready !')
 
         self.execute_srv = self.create_service(SetBool, 'execute', self._srv_cb)
-        self.setclass_srv = self.create_service(SetClasses, 'set_class', self._setclass)
+        self.setclass_srv = self.create_service(SetClasses, 'set_classes', self._setclass)
         self.setpred_srv = self.create_service(SetPredict, 'set_predict', self._setpred)
         self.execute_flag = False
     
@@ -107,18 +107,18 @@ class YoloWorldRos2Main(Node):
                 obj_image = ObjectImage()
                 bp = BbPixelPose()
                 bp.pose1.x, bp.pose1.y, bp.pose2.x, bp.pose2.y = map(int, bbox)
-                if bp.pose1.x != bp.pose2.x and bp.pose1.y != bp.pose2.y:
-                    bp.class_name = results.names.get(int(cls))
-                    bp.id = int(cls)
-                    bp.predict = pred.item()
-                    bounding_box_list.append(bp)
-                    
-                    obj_image.image = self.bridge.cv2_to_imgmsg(image[bp.pose1.y : bp.pose2.y, bp.pose1.x : bp.pose2.x], "bgr8")
-                    obj_image.image.header = msg.header
-                    obj_image.class_name = bp.class_name 
-                    obj_image.id = bp.id
-                    obj_image.predict = bp.predict
-                    object_image_list.append(obj_image)
+                bp.class_name = results.names.get(int(cls))
+                bp.id = int(cls)
+                bp.predict = pred.item()
+                bounding_box_list.append(bp)
+                
+                obj_image.image = self.bridge.cv2_to_imgmsg(image[bp.pose1.y : bp.pose2.y, bp.pose1.x : bp.pose2.x], "bgr8")
+                obj_image.image.header = msg.header
+                obj_image.class_name = bp.class_name 
+                obj_image.id = bp.id
+                obj_image.predict = bp.predict
+                obj_image.pose1.x, obj_image.pose1.y, obj_image.pose2.x, obj_image.pose2.y = map(int, bbox)
+                object_image_list.append(obj_image)
             
             bpa = BbPixelPoseArray()
             bpa.header = msg.header
