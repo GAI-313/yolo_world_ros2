@@ -78,6 +78,19 @@ class YoloWorldRos2Main(Node):
     def _setpred(self, req: SetPredict.Request, res: SetPredict.Response) ->SetPredict.Response:
         self.predict = req.predict
         self.get_logger().info(f'Set Detect predict: {self.predict}')
+        _execute_flag = self.execute_flag
+        self.execute_flag = False
+
+        del self.model
+
+        self.get_logger().info('YoLo-World ROS2 setup ...')
+        self.model = YOLOWorld('/home/user/yolov8l-world.pt')
+        self.model.set_classes(self.classes)
+        self.get_logger().info('YoLo-World ROS2 Ready !')
+
+        if _execute_flag:
+            self.execute_flag = True
+            
         return res
     
     def _image_cb(self, msg: Image) ->None:
