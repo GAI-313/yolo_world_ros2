@@ -1,6 +1,6 @@
 services:
-  yolo_world_ros2: $yolo_world_ros2
-    container_name: yolo_world_ros2_launch
+  yolo_world_ros2:
+    container_name: yolo_world_ros2
     image: nakalab/humble:yolo_world_ros2
     privileged: true
     ipc: host
