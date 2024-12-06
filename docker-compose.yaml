@@ -30,8 +30,3 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
-
-  devel:
-    <<: *yolo_world_ros2
-    container_name: yolo_world_ros2-devel
-    command: /bin/bash

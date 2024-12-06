@@ -12,6 +12,11 @@ def generate_launch_description():
         ('depth/camera_info', '/camera/camera/depth/camera_info'),
         ('depth/image_raw', '/camera/camera/depth/image_rect_raw')
     ]
+    '''
+        ('depth/camera_info', '/camera/camera/aligned_depth_to_color/camera_info'),
+        ('depth/image_raw', '/camera/camera/aligned_depth_to_color/image_raw')
+    ]
+    '''
 
     yolo_world_ros2_main = Node(
         package='yolo_world_ros2',
