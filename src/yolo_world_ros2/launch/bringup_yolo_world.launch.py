@@ -8,9 +8,9 @@ def generate_launch_description():
     namespace = 'yolo_world'
 
     remappings = [
-        ('image_raw', '/camera/color/image_raw'),
-        ('depth/camera_info', '/camera/aligned_depth_to_color/camera_info'),
-        ('depth/image_raw', '/camera/aligned_depth_to_color/image_raw')
+        ('image_raw', '/camera/camera/color/image_raw'),
+        ('depth/camera_info', '/camera/camera/depth/camera_info'),
+        ('depth/image_raw', '/camera/camera/depth/image_rect_raw')
     ]
 
     yolo_world_ros2_main = Node(
