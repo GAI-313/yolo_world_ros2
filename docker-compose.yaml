@@ -1,7 +1,7 @@
 services:
   yolo_world_ros2:
     container_name: yolo_world_ros2
-    image: nakalab/humble:yolo_world_ros2
+    image: gai313/nakalab_docker:humble-yolo_world_ros2
     privileged: true
     ipc: host
     network_mode: host
@@ -20,7 +20,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - $HOME/.Xauthority/:/root/.Xauthority
       - /dev:/dev
-      - ./src:/home/user/colcon_ws/src
+      - ./src:/colcon_ws/src
     devices:
        - /dev:/dev
     deploy:
