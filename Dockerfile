@@ -5,7 +5,8 @@
 FROM gai313/nakalab_docker:humble-base
 
 WORKDIR /
-RUN wget https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8l-world.pt
+RUN wget https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8l-world.pt &&\
+    wget https://github.com/ultralytics/assets/releases/download/v8.3.0/sam_b.pt
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
