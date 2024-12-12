@@ -14,6 +14,7 @@
 
   <depend>yolo_world_msgs</depend>
   <depend>yolo_world_srvs</depend>
+  <depend>cv_bridge</depend>
 
   <export>
     <build_type>ament_python</build_type>
