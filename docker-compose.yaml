@@ -30,3 +30,4 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+    #command: "ros2 launch yolo_world_ros2 bringup_yolo_world.launch.py"
