@@ -12,8 +12,7 @@
   <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>
 
-  <depend>yolo_world_msgs</depend>
-  <depend>yolo_world_srvs</depend>
+  <depend>yolo_world_interfaces</depend>
   <depend>cv_bridge</depend>
 
   <export>

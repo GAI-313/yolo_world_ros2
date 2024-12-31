@@ -40,7 +40,8 @@ setup(
     entry_points={
         'console_scripts': [
             'yolo_world_ros2_main = yolo_world_ros2.yolo_world_ros2_main:main',
-            'pose_transformer = yolo_world_ros2.yolo_world_ros2_main:pose_transformer'
+            'pose_transformer = yolo_world_ros2.yolo_world_ros2_main:pose_transformer',
+            'seg_pose_transformer = yolo_world_ros2.yolo_world_ros2_main:seg_pose_transformer'
         ],
     },
 )
