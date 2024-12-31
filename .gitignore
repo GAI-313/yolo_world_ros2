@@ -1,3 +1,4 @@
 *.pt
+**/.vscode
 **/__pycache__/**
 **/yolo_world_interfaces
