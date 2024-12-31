@@ -12,15 +12,25 @@ find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
+
+#set(msg_files
+#  "msg/PixelPose.msg"
+#  "msg/BbPixelPose.msg"
+#  "msg/BbPixelPoseArray.msg"
+#  "msg/ObjectPose.msg"
+#  "msg/ObjectPoseArray.msg"
+#  "msg/ObjectImage.msg"
+#  "msg/ObjectImageArray.msg"
+#  "msg/ObjectSegImage.msg"
+#  "msg/ObjectSegImageArray.msg"
+#  DEPENDENCIES builtin_interfaces std_msgs geometry_msgs sensor_msgs
+#)
 set(msg_files
-  "msg/PixelPose.msg"
-  "msg/BbPixelPose.msg"
-  "msg/BbPixelPoseArray.msg"
-  "msg/ObjectPose.msg"
-  "msg/ObjectPoseArray.msg"
-  "msg/ObjectImage.msg"
-  "msg/ObjectImageArray.msg"
-  DEPENDENCIES builtin_interfaces std_msgs geometry_msgs sensor_msgs
+  "msg/ObjectInfo2D.msg"
+  "msg/ObjectInfo2DArray.msg"
+  "msg/ObjectInfo3D.msg"
+  "msg/ObjectInfo3DArray.msg"
+  DEPENDENCIES builtin_interfaces std_msgs geometry_msgs sensor_msgs  
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
