@@ -3,8 +3,8 @@ from ultralytics import YOLOWorld, SAM
 from ultralytics import settings
 
 import rclpy.subscription
-from yolo_world_msgs.msg import *
-from yolo_world_srvs.srv import *
+from object_detect_msgs.msg import *
+from object_detect_srvs.srv import *
 from std_srvs.srv import SetBool
 from sensor_msgs.msg import Image, CameraInfo
 from visualization_msgs.msg import Marker, MarkerArray
@@ -114,6 +114,7 @@ Execute: {self.execute_flag}
 
         if _execute_flag:
             self.execute_flag = True
+        res.success = True
 
         return res
 
@@ -132,6 +133,7 @@ Execute: {self.execute_flag}
 
         if _execute_flag:
             self.execute_flag = True
+        res.success = True
 
         return res
 
