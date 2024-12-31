@@ -2,7 +2,7 @@
 # This software is released under the MIT License.
 # http://opensource.org/licenses/mit-license.php
 
-FROM gai313/nakalab_docker:humble-base
+FROM gai313/ros:humble
 
 WORKDIR /
 RUN wget https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8l-world.pt &&\
