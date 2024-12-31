@@ -1,4 +1,4 @@
 *.pt
 **/.vscode
 **/__pycache__/**
-**/object_detect_interfaces/**
+src/object_detect_interfaces/
