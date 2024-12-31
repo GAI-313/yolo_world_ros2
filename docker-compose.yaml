@@ -1,7 +1,7 @@
 services:
   yolo_world_ros2:
     container_name: yolo_world_ros2
-    image: gai313/ros2:humble-yolo_world_ros2
+    image: gai313/ros:humble-yolo_world_ros2
     privileged: true
     ipc: host
     network_mode: host
@@ -34,7 +34,7 @@ services:
 
   develop:
     container_name: yolo_world_ros2-develop
-    image: gai313/ros2:humble-yolo_world_ros2
+    image: gai313/ros:humble-yolo_world_ros2
     privileged: true
     ipc: host
     network_mode: host
