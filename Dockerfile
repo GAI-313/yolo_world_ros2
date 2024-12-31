@@ -13,7 +13,7 @@ RUN pip install -r requirements.txt
 
 WORKDIR /colcon_ws
 
-RUn apt-get update &&\
+RUN apt-get update &&\
     apt-get install -y ros-humble-cv-bridge
 
 COPY ./src ./src
