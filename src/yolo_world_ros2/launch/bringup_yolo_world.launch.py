@@ -5,10 +5,11 @@ from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 
 # default values for debug
-DEFAULT_PREDICT = 0.1
+DEFAULT_PREDICT = 0.01
 DEFAULT_CLASSES = ''
 DEFAULT_USESAM = False
 DEFAULT_EXECUTE = False
+DEFAULT_DIVISOR = 1000.0
 
 def generate_launch_description():
     ld = LaunchDescription()
@@ -21,17 +22,13 @@ def generate_launch_description():
     default_classes = LaunchConfiguration('classes')
     default_use_sam = LaunchConfiguration('use_sam')
     default_execute = LaunchConfiguration('execute')
+    default_divisor = LaunchConfiguration('depth_divisor')
 
 
     remappings = [
         ('image_raw', '/camera/rgb/image_raw'),
         ('depth/camera_info', '/camera/depth/camera_info'),
         ('depth/image_raw', '/camera/depth/image_raw')
-    ]
-    remappings = [
-        ('image_raw', '/camera/camera/color/image_raw'),
-        ('depth/camera_info', '/camera/camera/aligned_depth_to_color/camera_info'),
-        ('depth/image_raw', '/camera/camera/aligned_depth_to_color/image_raw')
     ]
 
 
@@ -51,11 +48,16 @@ def generate_launch_description():
         'execute', default_value=str(DEFAULT_EXECUTE),
         description='Enables object detection by default. If set to False, object detection can be activated via a service.'
     )
+    declare_divisor = DeclareLaunchArgument(
+        'depth_divisor', default_value=str(DEFAULT_DIVISOR),
+        description='Depth image divisor.'
+    )
 
     ld.add_action(declare_predict)
     ld.add_action(declare_classes)
     ld.add_action(declare_use_sam)
     ld.add_action(declare_execute)
+    ld.add_action(declare_divisor)
 
 
     yolo_world_ros2_main = Node(
@@ -77,6 +79,7 @@ def generate_launch_description():
         package='yolo_world_ros2',
         executable='pose_transformer',
         name='pose_transformer',
+        parameters=[{'depth_image_units_divisor':default_divisor}],
         namespace=namespace,
         output='screen',
         emulate_tty=True,
