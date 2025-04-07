@@ -1,0 +1,4 @@
+float32 conf 0.5
+string[] classes
+---
+bool success
