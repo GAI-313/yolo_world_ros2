@@ -19,7 +19,7 @@ class YoloWorldRos2(Node):
         super().__init__('yolo_world_ros2')
 
         self.declare_parameter('auto_bringup', True)
-        self.declare_parameter('yolo_model', 'yolov8m-world.pt')
+        self.declare_parameter('yolo_model', 'yolov8l-world.pt')
 
         self.execute = self.get_parameter('auto_bringup').get_parameter_value().bool_array_value
         self.yolo_model = self.get_parameter('yolo_model').get_parameter_value().string_value

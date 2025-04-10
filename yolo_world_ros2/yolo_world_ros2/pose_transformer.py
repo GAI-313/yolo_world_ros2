@@ -48,7 +48,7 @@ class PoseTransformer(Node):
         
         # パブリッシャーの設定
         self.marker_pub = self.create_publisher(MarkerArray, '/yolo_world/markers', 10)
-        self.pose_pub = self.create_publisher(PoseArray, '/yolo_world/pose/pose3d', 10)
+        self.pose_pub = self.create_publisher(PoseArray, '/yolo_world/pose/pose_3d', 10)
         
         # その他の初期化
         self.bridge = CvBridge()
