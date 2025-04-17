@@ -7,10 +7,10 @@ from ament_index_python.packages import get_package_share_directory
 import os
 
 
-DEFAULT_COLOR_TOPIC = '/d435/color/image_raw'
-DEFAULT_DEPTH_TOPIC = '/d435/depth/image_rect_raw'
-DEFAULT_DEPTH_INFO = '/d435/depth/camera_info'
-DEFAULT_COLOR_INFO = '/d435/color/camera_info'
+DEFAULT_COLOR_TOPIC = '/arm_camera/color/image_raw'
+DEFAULT_DEPTH_TOPIC = '/arm_camera/depth/image_rect_raw'
+DEFAULT_DEPTH_INFO = '/arm_camera/depth/camera_info'
+DEFAULT_COLOR_INFO = '/arm_camera/color/camera_info'
 DEFAULT_PARAMS_FILE = os.path.join(
     get_package_share_directory('yolo_world_ros2'),
     'params', 'yolo_world_ros2.yaml'
