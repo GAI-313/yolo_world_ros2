@@ -8,11 +8,13 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 set(msg_files
   "msg/RoiPose.msg"
   "msg/RoiPoseArray.msg"
+  "msg/PoseStampedArray.msg"
 )
 set(srv_files
   "srv/SetClasses.srv"
@@ -21,7 +23,7 @@ set(srv_files
 rosidl_generate_interfaces(${PROJECT_NAME}
   ${msg_files}
   ${srv_files}
-  DEPENDENCIES std_msgs 
+  DEPENDENCIES std_msgs geometry_msgs
 )
 
 if(BUILD_TESTING)

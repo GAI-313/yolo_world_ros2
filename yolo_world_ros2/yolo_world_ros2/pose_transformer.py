@@ -4,7 +4,7 @@ from rclpy.node import Node
 import rclpy
 
 from message_filters import ApproximateTimeSynchronizer, Subscriber
-from yolo_world_interfaces.msg import RoiPoseArray
+from yolo_world_interfaces.msg import RoiPoseArray, PoseStampedArray
 from sensor_msgs.msg import Image, CameraInfo
 from visualization_msgs.msg import Marker, MarkerArray
 from geometry_msgs.msg import Point, PoseStamped
@@ -48,7 +48,7 @@ class PoseTransformer(Node):
         
         # パブリッシャーの設定
         self.marker_pub = self.create_publisher(MarkerArray, '/yolo_world/markers', 10)
-        self.pose_pub = self.create_publisher(PoseStamped, '/yolo_world/pose/pose_3d', 10)
+        self.pose_pub = self.create_publisher(PoseStampedArray, '/yolo_world/pose/pose_3d', 10)
         
         # その他の初期化
         self.bridge = CvBridge()
@@ -79,6 +79,7 @@ class PoseTransformer(Node):
             marker_array = MarkerArray()
             current_marker_ids = set()
             current_frame_instances = {}
+            pose_stamped_list = []
             
             # 古いマーカーを削除
             for marker_id in self.last_marker_ids:
@@ -158,21 +159,29 @@ class PoseTransformer(Node):
                 text_marker.text = f"{roi_pose.class_name}\nconf: {roi_pose.conf:.2f}"
                 marker_array.markers.append(text_marker)
                 
-                # PoseStamped で個別パブリッシュ
+                # PoseStamped 生成
                 ps = PoseStamped()
-                ps.header = pose_msg.header
-                ps.header.frame_id = instance_id
+                ps.header.stamp = depth_msg.header.stamp
+                ps.header.frame_id = roi_pose.class_name
                 ps.pose.position.x = x
                 ps.pose.position.y = y
                 ps.pose.position.z = z
-                self.pose_pub.publish(ps)
+                ps.pose.orientation.w = 1.0
+                pose_stamped_list.append(ps)
 
             # 状態更新
             self.object_instances = current_frame_instances
             self.last_marker_ids = current_marker_ids
             
+            # マーカーと姿勢情報をパブリッシュ
             if marker_array.markers:
                 self.marker_pub.publish(marker_array)
+            
+            if pose_stamped_list:
+                pose_array_msg = PoseStampedArray()
+                pose_array_msg.header = depth_msg.header
+                pose_array_msg.posestampedarray = pose_stamped_list
+                self.pose_pub.publish(pose_array_msg)
 
         except Exception as e:
             self.get_logger().error(f"処理エラー: {str(e)}")
